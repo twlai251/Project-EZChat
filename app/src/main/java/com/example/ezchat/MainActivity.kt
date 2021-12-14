@@ -6,9 +6,11 @@ import android.os.Bundle
 import android.util.Log
 import android.widget.Toast
 import com.google.firebase.auth.FirebaseAuth
+import com.google.firebase.database.FirebaseDatabase
 import kotlinx.android.synthetic.main.activity_main.*
 
 class MainActivity : AppCompatActivity() {
+
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
         setContentView(R.layout.activity_main)
@@ -18,6 +20,7 @@ class MainActivity : AppCompatActivity() {
     }
 
     private fun performRegister() {
+
         btn_register.setOnClickListener {
             var username_res = et_register_username.text.toString()
             var email_res = et_register_email.text.toString()
@@ -39,13 +42,16 @@ class MainActivity : AppCompatActivity() {
                     if(!it.isSuccessful) return@addOnCompleteListener
                     Log.d("NewUser", "Successfully created user with uid: ${it.result.user!!.uid}")
                     Toast.makeText(this, "Successfully registration!", Toast.LENGTH_LONG).show()
+                    storingToFirebaseDatabase(username_res)
                 }
                 .addOnFailureListener{
                     Log.d("Main", "Failed to create user: ${it.message}")
                     Toast.makeText(this, "Failed to create user: ${it.message}", Toast.LENGTH_LONG).show()
                 }
 
+
         }
+
     }
 
     private fun backToLogin(){
@@ -57,4 +63,16 @@ class MainActivity : AppCompatActivity() {
         }
     }
 
+    private fun storingToFirebaseDatabase(username: String) {
+        val uid = FirebaseAuth.getInstance().uid ?: ""
+        val ref = FirebaseDatabase.getInstance().getReference("/users/$uid")
+
+        val user = User(username, uid)
+        ref.setValue(user).addOnSuccessListener { Log.d("RegisterActivity", " User saved on database.") }
+    }
+
+    //END
+
 }
+
+class User(val username:String, val uid:String)
