@@ -3,8 +3,13 @@
   <component name="DesignSurface">
     <option name="filePathToZoomLevelMap">
       <map>
+        <entry key="..\:/Users/SenpaiCookie/Documents/GitHub/ezChat/app/src/main/res/drawable/rounded_selected_photo.xml" value="0.2984375" />
+        <entry key="..\:/Users/SenpaiCookie/Documents/GitHub/ezChat/app/src/main/res/layout/activity_latest_messages.xml" value="0.25" />
         <entry key="..\:/Users/SenpaiCookie/Documents/GitHub/ezChat/app/src/main/res/layout/activity_login.xml" value="0.28854166666666664" />
         <entry key="..\:/Users/SenpaiCookie/Documents/GitHub/ezChat/app/src/main/res/layout/activity_main.xml" value="0.2866847826086957" />
+        <entry key="..\:/Users/SenpaiCookie/Documents/GitHub/ezChat/app/src/main/res/layout/activity_new_message.xml" value="0.28229166666666666" />
+        <entry key="..\:/Users/SenpaiCookie/Documents/GitHub/ezChat/app/src/main/res/layout/user_row_new_message.xml" value="0.33" />
+        <entry key="..\:/Users/SenpaiCookie/Documents/GitHub/ezChat/app/src/main/res/menu/nav_menu.xml" value="0.28229166666666666" />
       </map>
     </option>
   </component>
