@@ -11,7 +11,7 @@
     <FrameLayout
         android:id="@+id/header_image"
         android:layout_width="wrap_content"
-        android:layout_height="200dp"
+        android:layout_height="100dp"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toTopOf="parent">
@@ -39,7 +39,7 @@
         android:id="@+id/tv_title_register"
         android:layout_width="wrap_content"
         android:layout_height="wrap_content"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="20dp"
         android:text="REGISTER"
         android:textColor="@color/black"
         android:textSize="18sp"
@@ -49,21 +49,68 @@
         app:layout_constraintTop_toBottomOf="@+id/header_image"
         />
 
-    <!--    USERNAME PART  -->
+    <!--    USERNAME AKA NAME PART  -->
     <EditText
         android:id="@+id/et_register_username"
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:backgroundTint="#D6D6D6"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="35dp"
+        android:layout_marginTop="25dp"
         android:layout_marginEnd="16dp"
-        android:hint="Username"
+        android:hint="Name"
         android:inputType="text"
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
         app:layout_constraintTop_toBottomOf="@+id/tv_title_register" />
 
+    <!--    ROLL NUM PART  -->
+    <EditText
+        android:id="@+id/et_register_roll_num"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:backgroundTint="#D6D6D6"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Please enter if your a Student or Professor"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_register_username"
+        />
+
+    <!--    STUDENT ID PART  -->
+    <EditText
+        android:id="@+id/et_register_student_id"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:backgroundTint="#D6D6D6"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Student ID"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_register_roll_num"
+        />
+
+    <!--    DEPARTMENT PART  -->
+    <EditText
+        android:id="@+id/et_register_department"
+        android:layout_width="match_parent"
+        android:layout_height="wrap_content"
+        android:inputType="text"
+        android:backgroundTint="#D6D6D6"
+        android:layout_marginStart="16dp"
+        android:layout_marginTop="20dp"
+        android:layout_marginEnd="16dp"
+        android:hint="Department"
+        app:layout_constraintEnd_toEndOf="parent"
+        app:layout_constraintStart_toStartOf="parent"
+        app:layout_constraintTop_toBottomOf="@+id/et_register_student_id"
+        />
 
     <!--    EMAIL PART  -->
     <EditText
@@ -73,13 +120,13 @@
         android:inputType="text"
         android:backgroundTint="#D6D6D6"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="20dp"
         android:layout_marginEnd="16dp"
         android:hint="Email ID"
 
         app:layout_constraintEnd_toEndOf="parent"
         app:layout_constraintStart_toStartOf="parent"
-        app:layout_constraintTop_toBottomOf="@+id/et_register_username"
+        app:layout_constraintTop_toBottomOf="@+id/et_register_department"
         />
 
     <!--    PASSWORD PART  -->
@@ -105,7 +152,7 @@
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
         android:layout_marginStart="16dp"
-        android:layout_marginTop="30dp"
+        android:layout_marginTop="10dp"
         android:layout_marginEnd="16dp"
         android:backgroundTint="@color/button_light_blue"
         android:foreground="?attr/selectableItemBackground"
@@ -123,7 +170,6 @@
     <LinearLayout
         android:layout_width="match_parent"
         android:layout_height="wrap_content"
-        android:layout_marginTop="5dp"
         android:gravity="center_vertical"
         android:orientation="horizontal"
         app:layout_constraintEnd_toEndOf="parent"
