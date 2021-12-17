@@ -13,11 +13,8 @@ import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
 import com.xwray.groupie.GroupAdapter
-import com.xwray.groupie.Item
 import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.activity_chat_log.*
-import kotlinx.android.synthetic.main.chat_from.view.*
-import kotlinx.android.synthetic.main.chat_to.view.*
 
 class ChatLogActivity : AppCompatActivity() {
 
@@ -36,7 +33,7 @@ class ChatLogActivity : AppCompatActivity() {
 
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         if (user != null) {
-            supportActionBar?.title = toUser?.user_name
+            supportActionBar?.title = user.user_name
         }
 
         listenForMessages()
@@ -65,7 +62,7 @@ class ChatLogActivity : AppCompatActivity() {
                         val current_User = LatestMessagesActivity.currentUser ?: return
                         adapter.add(ChatFromItem(chatMessage.text, current_User))
                     }else{
-//                        toUser = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+                        toUser = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
                         adapter.add(ChatToItem(chatMessage.text, toUser!!))
                     }
 
