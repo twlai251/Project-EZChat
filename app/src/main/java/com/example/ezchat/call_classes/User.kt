@@ -1,4 +1,4 @@
-package com.example.ezchat
+package com.example.ezchat.call_classes
 
 import android.os.Parcelable
 import kotlinx.android.parcel.Parcelize

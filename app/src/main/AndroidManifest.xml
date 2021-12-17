@@ -12,43 +12,51 @@
         android:roundIcon="@mipmap/ic_launcher_round"
         android:supportsRtl="true"
         android:theme="@style/Theme.EzChat">
+        <activity
+            android:name=".appStartActivity"
+            android:exported="true"
+            android:theme="@style/Theme.AppCompat.NoActionBar">
+
+            <intent-filter>
+                <action android:name="android.intent.action.MAIN" />
+
+                <category android:name="android.intent.category.LAUNCHER" />
+            </intent-filter>
+
+        </activity>
         <!-- Register Page -->
         <activity
             android:name=".RegisterActivity"
-            android:exported="true" />
-
-        <!-- Login Page -->
+            android:exported="true" /> <!-- Login Page -->
         <activity
             android:name=".LoginActivity"
-            android:exported="true" />
+            android:exported="true">
 
-        <!-- New Message Page -->
+        </activity> <!-- New Message Page -->
         <activity
             android:name=".NewMessageActivity"
             android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LatestMessagesActivity" />
-        </activity>
-
-        <!-- Chat Log Page -->
+        </activity> <!-- Chat Log Page -->
         <activity
             android:name=".ChatLogActivity"
             android:exported="true">
             <meta-data
                 android:name="android.support.PARENT_ACTIVITY"
                 android:value=".LatestMessagesActivity" />
-        </activity>
-
-        <!-- Latest Messages Page -->
+        </activity> <!-- Latest Messages Page -->
         <activity
             android:name=".LatestMessagesActivity"
             android:exported="true">
-            <intent-filter>
-                <action android:name="android.intent.action.MAIN" />
 
-                <category android:name="android.intent.category.LAUNCHER" />
-            </intent-filter>
+            <!-- <intent-filter> -->
+            <!-- <action android:name="android.intent.action.MAIN" /> -->
+
+
+            <!-- <category android:name="android.intent.category.LAUNCHER" /> -->
+            <!-- </intent-filter> -->
         </activity>
     </application>
 

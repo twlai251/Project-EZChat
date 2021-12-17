@@ -10,6 +10,7 @@ import kotlinx.android.synthetic.main.activity_login.*
 
 
 class LoginActivity : AppCompatActivity() {
+    var uid_num : String? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -38,6 +39,7 @@ class LoginActivity : AppCompatActivity() {
             .addOnCompleteListener {
                 if(!it.isSuccessful) return@addOnCompleteListener
                 Log.d("Login", "Successfully logged in: ${it.result.user?.uid}")
+                uid_num = it.result.user?.uid
 
                 val intent = Intent(this@LoginActivity, LatestMessagesActivity::class.java)
                 startActivity(intent)

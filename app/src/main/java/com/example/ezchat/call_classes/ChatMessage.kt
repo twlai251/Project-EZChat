@@ -1,4 +1,4 @@
-package com.example.ezchat
+package com.example.ezchat.call_classes
 
 class ChatMessage(
     val id: String,

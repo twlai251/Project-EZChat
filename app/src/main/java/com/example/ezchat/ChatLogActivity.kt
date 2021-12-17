@@ -3,6 +3,10 @@ package com.example.ezchat
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
+import com.example.ezchat.call_classes.ChatFromItem
+import com.example.ezchat.call_classes.ChatMessage
+import com.example.ezchat.call_classes.ChatToItem
+import com.example.ezchat.call_classes.User
 import com.google.firebase.auth.FirebaseAuth
 import com.google.firebase.database.ChildEventListener
 import com.google.firebase.database.DataSnapshot
@@ -22,6 +26,7 @@ class ChatLogActivity : AppCompatActivity() {
     }
 
     val adapter = GroupAdapter<ViewHolder>()
+    var toUser : User? = null
 
     override fun onCreate(savedInstanceState: Bundle?) {
         super.onCreate(savedInstanceState)
@@ -31,24 +36,24 @@ class ChatLogActivity : AppCompatActivity() {
 
         val user = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
         if (user != null) {
-            supportActionBar?.title = user.user_name
+            supportActionBar?.title = toUser?.user_name
         }
-
-//        dummytesting()
 
         listenForMessages()
 
         send_message_btn.setOnClickListener {
             Log.d(TAG, "Attempt to send message")
             performSendMessage()
+            send_message_bar.text.clear()
 
         }
 
     }
-
-
+//    needs to edit, app not showing user name and text messages
     private fun listenForMessages(){
-        val ref = FirebaseDatabase.getInstance().getReference("/messages")
+        val fromID = FirebaseAuth.getInstance().uid
+        val toID = toUser?.uid
+        val ref = FirebaseDatabase.getInstance().getReference("/user-messages/$fromID/$toID")
 
         ref.addChildEventListener(object : ChildEventListener {
             override fun onChildAdded(p0: DataSnapshot, p1: String?) {
@@ -57,9 +62,11 @@ class ChatLogActivity : AppCompatActivity() {
                     Log.d("checkingMsg", chatMessage.text)
 
                     if (chatMessage.fromID == FirebaseAuth.getInstance().uid){
-                        adapter.add(ChatFromItem(chatMessage.text))
+                        val current_User = LatestMessagesActivity.currentUser ?: return
+                        adapter.add(ChatFromItem(chatMessage.text, current_User))
                     }else{
-                        adapter.add(ChatToItem(chatMessage.text))
+//                        toUser = intent.getParcelableExtra<User>(NewMessageActivity.USER_KEY)
+                        adapter.add(ChatToItem(chatMessage.text, toUser!!))
                     }
 
                 }
@@ -94,48 +101,17 @@ class ChatLogActivity : AppCompatActivity() {
 
         if (fromID == null) return
 
-        val reference = FirebaseDatabase.getInstance().getReference("/messages").push()
+        val reference = FirebaseDatabase.getInstance().getReference("/user-messages/$fromID/$to_user").push()
+        val toRef = FirebaseDatabase.getInstance().getReference("/user-messages/$to_user/$fromID").push()
 
         val chat_Message = ChatMessage(reference.key!!, text, fromID, to_user, System.currentTimeMillis() / 1000)
 
         reference.setValue(chat_Message)
+        view_chat_log.scrollToPosition(adapter.itemCount-1)
+
+        toRef.setValue(chat_Message)
     }
 
-
-    private fun dummytesting() {
-        val adapter = GroupAdapter<ViewHolder>()
-
-        adapter.add(ChatFromItem("From message, hello there this is from another user"))
-        adapter.add(ChatToItem("To message, hello there this is from original user"))
-        adapter.add(ChatFromItem("From message, hello there this is from another user"))
-        adapter.add(ChatToItem("To message, hello there this is from original user"))
-        adapter.add(ChatFromItem("From message, hello there this is from another user"))
-        adapter.add(ChatToItem("To message, hello there this is from original user"))
-        adapter.add(ChatFromItem("From message, hello there this is from another user"))
-        adapter.add(ChatToItem("To message, hello there this is from original user"))
-
-        view_chat_log.adapter = adapter
-
-    }
 }
 
-class ChatFromItem(val text:String): Item<ViewHolder>(){
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.to_message_text.text = text
-    }
-    // receiving messages
-    override fun getLayout(): Int {
-        return R.layout.chat_from
-    }
-}
 
-class ChatToItem(val text:String): Item<ViewHolder>(){
-    override fun bind(viewHolder: ViewHolder, position: Int) {
-        viewHolder.itemView.from_message_text.text = text
-
-    }
-    // receiving messages
-    override fun getLayout(): Int {
-        return R.layout.chat_to
-    }
-}
