@@ -4,7 +4,7 @@ import android.content.Intent
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
 import android.util.Log
-import com.example.ezchat.call_classes.User
+import com.example.ezchat.models.User
 import com.google.firebase.database.DataSnapshot
 import com.google.firebase.database.DatabaseError
 import com.google.firebase.database.FirebaseDatabase
@@ -22,9 +22,18 @@ class NewMessageActivity : AppCompatActivity() {
         setContentView(R.layout.activity_new_message)
 
         supportActionBar?.title = "Select User"
+//        val adapter = GroupAdapter<ViewHolder>()
+//
+//        adapter.add(UserItem())
+//        adapter.add(UserItem())
+//        adapter.add(UserItem())
+
+//        new_message.adapter = adapter
+
         fetchUsers()
 
     }
+
     companion object {
         val USER_KEY = "USER_KEY"
     }
@@ -58,7 +67,7 @@ class NewMessageActivity : AppCompatActivity() {
                 new_message.adapter = adapter
             }
 
-            override fun onCancelled(p0: DatabaseError) {
+            override fun onCancelled(error: DatabaseError) {
 
             }
         })
@@ -68,6 +77,7 @@ class UserItem(val user : User): Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
         // call in list for each user
         viewHolder.itemView.new_message_user.text = user.user_name
+
     }
     override fun getLayout(): Int {
         return R.layout.user_row_new_message

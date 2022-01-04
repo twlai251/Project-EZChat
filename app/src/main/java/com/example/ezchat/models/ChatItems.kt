@@ -1,4 +1,4 @@
-package com.example.ezchat.call_classes
+package com.example.ezchat.models
 
 import com.example.ezchat.R
 import com.xwray.groupie.Item
@@ -6,7 +6,7 @@ import com.xwray.groupie.ViewHolder
 import kotlinx.android.synthetic.main.chat_from.view.*
 import kotlinx.android.synthetic.main.chat_to.view.*
 
-class ChatFromItem(val text:String, val user: User): Item<ViewHolder>(){
+class ChatFromItem(val text:String): Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.to_message_text.text = text
 
@@ -21,7 +21,7 @@ class ChatFromItem(val text:String, val user: User): Item<ViewHolder>(){
     }
 }
 
-class ChatToItem(val text:String, val user: User): Item<ViewHolder>(){
+class ChatToItem(val text:String): Item<ViewHolder>(){
     override fun bind(viewHolder: ViewHolder, position: Int) {
         viewHolder.itemView.from_message_text.text = text
 
